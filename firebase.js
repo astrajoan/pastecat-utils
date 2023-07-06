@@ -1,20 +1,20 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
   addDoc,
   collection,
   doc,
   getDoc,
   getFirestore,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 import {
   getBytes,
   getDownloadURL,
   getStorage,
   ref,
   uploadString,
-} from "firebase/storage";
+} from 'firebase/storage';
 
-import firebaseConfig from './config.json';
+import { firebaseConfig } from './config.js';
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
