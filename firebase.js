@@ -13,12 +13,18 @@ import {
   ref,
   uploadString,
 } from 'firebase/storage';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithCredential,
+} from 'firebase/auth';
 
 import { firebaseConfig } from './config.js';
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
+const auth = getAuth(firebaseApp);
 
 export const getPasteCollection = async (pasteId) => {
   const snapshot = await getDoc(doc(db, "pastes", pasteId));
@@ -50,4 +56,9 @@ export const storePaste = async (pasteName, language, content) => {
   const storageRef = ref(storage, pasteId + "/" + pasteName);
   const snapshot = await uploadString(storageRef, content);
   return pasteId;
+};
+
+export const verifyCredential = async (token) => {
+  const credential = GoogleAuthProvider.credential(token);
+  await signInWithCredential(auth, credential);
 };
